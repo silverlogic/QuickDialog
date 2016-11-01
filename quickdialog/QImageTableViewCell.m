@@ -76,7 +76,7 @@ static NSString *kDetailImageValueObservanceContext = @"imageValue";
     CGFloat detailImageMargin = 2.0f;
     CGFloat detailImageSize = CGRectGetHeight(self.contentView.frame) - 2 * detailImageMargin;
     
-    _imageViewButton.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) / 4.0f, detailImageMargin, CGRectGetWidth(self.contentView.frame) / 2.0f, detailImageSize);
+    _imageViewButton.frame = CGRectMake((CGRectGetWidth(self.contentView.frame) - detailImageSize) / 2.0f, detailImageMargin, detailImageSize, detailImageSize);
     _imageElement.parentSection.entryPosition = _imageViewButton.frame;
     _imageViewButton.layer.cornerRadius = _imageViewButton.frame.size.width/2;
     
