@@ -174,8 +174,7 @@
     CGRect labelFrame = self.textLabel.frame;
     self.textLabel.frame = CGRectMake(labelFrame.origin.x, labelFrame.origin.y,
             textFieldFrame.origin.x  - labelFrame.origin.x, labelFrame.size.height);
-    _textField.frame = CGRectMake(textFieldFrame.origin.x, textFieldFrame.origin.y, self.contentView.bounds.size.width - textFieldFrame.origin.x - 20, textFieldFrame.size.height);
-    
+    _textField.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 200, textFieldFrame.origin.y, self.contentView.bounds.size.width - textFieldFrame.origin.x - 20, textFieldFrame.size.height);
 }
 
 - (void)prepareForReuse {

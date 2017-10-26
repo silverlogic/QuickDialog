@@ -39,61 +39,58 @@ static const int kCellMinimumLabelWidth = 80;
 - (void)layoutSubviewsInsideBounds:(CGRect)bounds
 {
     CGSize sizeWithMargin = bounds.size;
-
+    
     if (self.imageView.image!=nil){
         sizeWithMargin = CGSizeMake(sizeWithMargin.width - self.imageView.image.size.width - QCellMarginDouble, sizeWithMargin.height);
     }
-
+    
+    self.accessoryView.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - self.accessoryView.frame.size.width) - 16, QCellMargin, self.accessoryView.frame.size.width, self.accessoryView.frame.size.height);
+    
     if (_labelingPolicy == QLabelingPolicyTrimTitle)
     {
         if (self.textLabel.text!=nil){
             sizeWithMargin = CGSizeMake(sizeWithMargin.width-kCellMinimumLabelWidth, sizeWithMargin.height- QCellMarginDouble);
         }
-
+        
         CGSize valueSize = CGSizeZero;
         if (self.detailTextLabel.text!=nil) {
             valueSize = [self.detailTextLabel.text sizeWithFont:self.detailTextLabel.font constrainedToSize:sizeWithMargin];
         }
-
+        
         self.textLabel.frame = CGRectMake(
-                self.textLabel.frame.origin.x,
-                QCellMargin,
-                bounds.size.width - valueSize.width - QCellMarginDouble - QCellMarginDouble,
-                bounds.size.height- QCellMarginDouble);
-
+                                          self.textLabel.frame.origin.x,
+                                          QCellMargin,
+                                          bounds.size.width - valueSize.width - QCellMarginDouble - QCellMarginDouble,
+                                          bounds.size.height- QCellMarginDouble);
+        
         self.detailTextLabel.frame = CGRectMake(
-                bounds.size.width - valueSize.width - QCellMargin,
-                QCellMargin,
-                valueSize.width,
-                bounds.size.height- QCellMarginDouble);
+                                                bounds.size.width - valueSize.width - QCellMargin,
+                                                QCellMargin,
+                                                valueSize.width,
+                                                bounds.size.height- QCellMarginDouble);
     } else {
-
+        
         if (self.detailTextLabel.text!=nil){
             sizeWithMargin = CGSizeMake(sizeWithMargin.width-kCellMinimumLabelWidth, sizeWithMargin.height- QCellMarginDouble);
         }
-
+        
         CGSize valueSize = CGSizeZero;
         if (!self.detailTextLabel.text) {
             valueSize = CGSizeMake(sizeWithMargin.width - QCellMarginDouble - QCellMargin, sizeWithMargin.height);
         } else if (self.textLabel.text!=nil) {
             valueSize = [self.textLabel.text sizeWithFont:self.textLabel.font constrainedToSize:sizeWithMargin];
         }
-
-        self.textLabel.frame = CGRectMake(
-                self.textLabel.frame.origin.x,
-                QCellMargin,
-                valueSize.width,
-                bounds.size.height- QCellMarginDouble);
-
+        
+        self.textLabel.frame = CGRectMake(15, self.textLabel.frame.origin.y, [UIScreen mainScreen].bounds.size.width - 15, self.textLabel.frame.size.height);
+        
         CGFloat detailsWidth = bounds.size.width - QCellMarginDouble;
         if (valueSize.width>0)
             detailsWidth = detailsWidth - valueSize.width - QCellMarginDouble;
-
         self.detailTextLabel.frame = CGRectMake(
-                bounds.size.width - detailsWidth ,
-                QCellMargin,
-                detailsWidth - (self.accessoryView ==nil ? 0 : QCellMarginDouble) - (self.accessoryType !=UITableViewCellAccessoryNone ? 0 : QCellMarginDouble),
-                bounds.size.height- QCellMarginDouble);
+                                                bounds.size.width - detailsWidth ,
+                                                QCellMargin,
+                                                detailsWidth - (self.accessoryView ==nil ? 0 : QCellMarginDouble) - (self.accessoryType !=UITableViewCellAccessoryNone ? 0 : QCellMarginDouble),
+                                                bounds.size.height- QCellMarginDouble);
     }
 }
 
